@@ -9,9 +9,6 @@
     width: 800px;
     height: 400px;
 }
-#tweet {
-    color: royalblue;
-}
 </style>
 <script src="jquery.js"></script>
 <script src="d3.min.js"></script>
@@ -53,10 +50,6 @@ function refresh () {
         var msg = ("I'm attending the @docker workshop at @scaleconf, "
                    + "and my #DockerCoins mining rig is crunching "
                    + speed.toFixed(1) + " hashes/second! W00T!");
-        $("#tweet").attr(
-            "href",
-            "https://twitter.com/intent/tweet?text="+encodeURIComponent(msg)
-        );
         if (graph == null) {
             graph = new Rickshaw.Graph({
                 renderer: "area",
@@ -104,7 +97,6 @@ $(function () {
 <h2>
   Current mining speed:
   <span id="speed">-</span>
-  <a id="tweet" href="#">(Tweet this!)</a>
 </h2>
 
 </body>
