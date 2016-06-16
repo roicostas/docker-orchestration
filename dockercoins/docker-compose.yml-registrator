@@ -1,0 +1,36 @@
+version: "2"
+
+services:
+  rng:
+    image: localhost:5000/dockercoins_rng
+#    ports:
+#    - "80"
+    networks:
+        rng:
+
+  rng-lb:
+    image: hanzel/load-balancing-swarm
+    environment:
+        - APP_NAME=dockercoins_rng
+        - CONSUL_URL=192.168.99.100:8500
+    networks:
+        rng:
+        default:
+            aliases: [ rng ]
+
+  hasher:
+    image: localhost:5000/dockercoins_hasher
+
+  webui:
+    image: localhost:5000/dockercoins_webui
+    ports:
+    - "8000:80"
+
+  redis:
+    image: redis
+
+  worker:
+    image: localhost:5000/dockercoins_worker
+
+networks:
+    rng:

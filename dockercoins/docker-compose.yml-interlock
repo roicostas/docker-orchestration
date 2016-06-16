@@ -1,0 +1,37 @@
+version: "2"
+
+services:
+  rng:
+    image: localhost:5000/dockercoins_rng
+    labels:
+        - "interlock.domain=rng"
+        - "interlock.hostname="
+        - "interlock.network=dockercoins_rng"
+    networks:
+        rng:
+
+  rng-lb:
+    image: haproxy
+    labels:
+        - "interlock.ext.name=haproxy"
+    networks:
+        rng:
+        default:
+            aliases: [ rng ]
+
+  hasher:
+    image: localhost:5000/dockercoins_hasher
+
+  webui:
+    image: localhost:5000/dockercoins_webui
+    ports:
+    - "8000:80"
+
+  redis:
+    image: redis
+
+  worker:
+    image: localhost:5000/dockercoins_worker
+
+networks:
+    rng:

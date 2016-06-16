@@ -1,0 +1,19 @@
+version: "2"
+
+services:
+  rng:
+    image: localhost:5000/dockercoins_rng
+
+  hasher:
+    image: localhost:5000/dockercoins_hasher
+
+  webui:
+    image: localhost:5000/dockercoins_webui
+    ports:
+    - "8000:80"
+
+  redis:
+    image: redis
+
+  worker:
+    image: localhost:5000/dockercoins_worker
