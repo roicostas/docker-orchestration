@@ -1,0 +1,25 @@
+version: "2"
+
+services:
+    interlock:
+        image: ehazlett/interlock:1.2.0
+        command: -D run -c /etc/interlock/config.toml
+        tty: true
+        ports:
+            - 8080
+        environment:
+            INTERLOCK_CONFIG: |
+                ListenAddr = ":8080"
+                DockerURL = "${SWARM_HOST}"
+                TLSCACert = "/var/lib/boot2docker/ca.pem"
+                TLSCert = "/var/lib/boot2docker/server.pem"
+                TLSKey = "/var/lib/boot2docker/server-key.pem"
+                [[Extensions]]
+                Name = "nginx"
+                ConfigPath = "/etc/nginx/nginx.conf"
+                PidPath = "/var/run/nginx.pid"
+                TemplatePath = ""
+                MaxConn = 1024
+                Port = 80
+        volumes:
+            - /var/lib/boot2docker:/var/lib/boot2docker:ro
