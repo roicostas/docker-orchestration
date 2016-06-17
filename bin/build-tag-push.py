@@ -1,24 +1,38 @@
 #!/usr/bin/env python
 
 from common import ComposeFile
+from optparse import OptionParser
 import os
 import subprocess
 import time
 
+# Add option to set custom version
+usage = "usage: %prog [options] [regsitry]"
+parser = OptionParser(usage=usage)
+parser.add_option("-v","--version", help="Image version", dest="version")
+(options, args) = parser.parse_args()
+
 registry = os.environ.get("DOCKER_REGISTRY")
 
 if not registry:
-    print("Please set the DOCKER_REGISTRY variable, e.g.:")
-    print("export DOCKER_REGISTRY=jpetazzo # use the Docker Hub")
-    print("export DOCKER_REGISTRY=localhost:5000 # use a local registry")
-    exit(1)
+    if args:
+        registry = args[0]
+    else:
+        print("Please set the DOCKER_REGISTRY variable, e.g.:")
+        print("export DOCKER_REGISTRY=jpetazzo # use the Docker Hub")
+        print("export DOCKER_REGISTRY=localhost:5000 # use a local registry")
+        exit(1)
+
+# Get Version
+if options.version is not None:
+    version = options.version
+else:
+    # Generate a Docker image tag, using the UNIX timestamp.
+    # (i.e. number of seconds since January 1st, 1970)
+    version = str(int(time.time()))
 
 # Get the name of the current directory.
 project_name = os.path.basename(os.path.realpath("."))
-
-# Generate a Docker image tag, using the UNIX timestamp.
-# (i.e. number of seconds since January 1st, 1970)
-version = str(int(time.time()))
 
 # Execute "docker-compose build" and abort if it fails.
 subprocess.check_call(["docker-compose", "-f", "docker-compose.yml", "build"])
