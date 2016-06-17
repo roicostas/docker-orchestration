@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+    registrator:
+        image: gliderlabs/registrator:v7
+        command: -internal consul://localhost:8500
+        environment:
+        - "affinity:container!=*registrator*"
+        volumes:
+        - "/var/run/docker.sock:/tmp/docker.sock"
+        network_mode: "host"
