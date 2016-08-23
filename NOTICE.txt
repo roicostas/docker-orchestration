@@ -1,0 +1,6 @@
+docker-orchestration
+Copyright 2016 The Apache Software Foundation
+
+dockercoins and other software provided by Jérôme Petazzoni 
+from https://github.com/jpetazzo/orchestration-workshop
+Copyright 2015 Jérôme Petazzoni
