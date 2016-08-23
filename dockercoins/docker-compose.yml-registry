@@ -1,0 +1,30 @@
+version: "2"
+
+services:
+  rng:
+    build: rng
+    image: localhost:5000/dockercoins_rng
+    ports:
+    - "8001:80"
+
+  hasher:
+    build: hasher
+    image: localhost:5000/dockercoins_hasher
+    ports:
+    - "8002:80"
+
+  webui:
+    build: webui
+    image: localhost:5000/dockercoins_webui
+    ports:
+    - "8000:80"
+    volumes:
+    - "./webui/files/:/files/"
+
+  redis:
+    image: redis
+
+  worker:
+    build: worker
+    image: localhost:5000/dockercoins_worker
+
