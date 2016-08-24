@@ -1,21 +1,21 @@
 version: "2"
-
+# Default env values are defined in .env
 services:
   rng:
     build: rng
-    image: localhost:5000/dockercoins_rng
+    image: ${REGISTRY}/dockercoins_rng${VERSION}
     ports:
     - "8001:80"
 
   hasher:
     build: hasher
-    image: localhost:5000/dockercoins_hasher
+    image: ${REGISTRY}/dockercoins_hasher${VERSION}
     ports:
     - "8002:80"
 
   webui:
     build: webui
-    image: localhost:5000/dockercoins_webui
+    image: ${REGISTRY}/dockercoins_webui${VERSION}
     ports:
     - "8000:80"
     volumes:
@@ -26,5 +26,5 @@ services:
 
   worker:
     build: worker
-    image: localhost:5000/dockercoins_worker
+    image: ${REGISTRY}/dockercoins_worker${VERSION}
 
