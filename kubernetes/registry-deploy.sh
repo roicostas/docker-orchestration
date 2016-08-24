@@ -1,11 +1,10 @@
 #!/bin/bash
 
-# Deploy local registry
-kubectl create -f registry.yml
+. dockercoins.env 
 
-# Deploy registry proxy workaroud, HostPort does not work with CoreOS flannel
-REGISTRY_IP=$(kubectl get service kube-registry --namespace kube-system --no-headers | awk '{print $2}')
-for n in $(cat nodes.env); do
-    ip=$(echo $n | cut -f2 -d=)
-    ssh -i key -o StrictHostKeyChecking=no core@$ip docker run -d --restart=always -p 5000:5000 jpetazzo/hamba 5000 $REGISTRY_IP:5000
-done
+# Create registry  deployment 
+kubectl run kube-registry --image=registry:2 --replicas=1
+# Create registry service
+kubectl expose deployment kube-registry --port=5000 --target-port=5000 --name=kube-registry --type=NodePort
+
+echo REGISTRY_DASH=localhost:$(kubectl describe service kube-registry | grep NodePort | grep -o "[0-9]*")/ >> dockercoins.env
