@@ -3,19 +3,19 @@ version: "2"
 services:
   rng:
     build: rng
-    image: ${REGISTRY}/dockercoins_rng${VERSION}
+    image: ${REGISTRY_DASH}dockercoins_rng${COLON_TAG}
     ports:
     - "8001:80"
 
   hasher:
     build: hasher
-    image: ${REGISTRY}/dockercoins_hasher${VERSION}
+    image: ${REGISTRY_DASH}dockercoins_hasher${COLON_TAG}
     ports:
     - "8002:80"
 
   webui:
     build: webui
-    image: ${REGISTRY}/dockercoins_webui${VERSION}
+    image: ${REGISTRY_DASH}dockercoins_webui${COLON_TAG}
     ports:
     - "8000:80"
     volumes:
@@ -26,5 +26,5 @@ services:
 
   worker:
     build: worker
-    image: ${REGISTRY}/dockercoins_worker${VERSION}
+    image: ${REGISTRY_DASH}dockercoins_worker${COLON_TAG}
 
