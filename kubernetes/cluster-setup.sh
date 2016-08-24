@@ -1,17 +1,16 @@
 #!/bin/bash
 
 BASE_PWD=$PWD
-rm dockercoins.env
 
 # -- Setup CoreOS-kubernetes cluster --
-#git clone https://github.com/coreos/coreos-kubernetes.git
+git clone https://github.com/coreos/coreos-kubernetes.git
 cd coreos-kubernetes/multi-node/vagrant
 
 # Condigure two controllers
-#sed 's/#$controller_count=1/$controller_count=2/g' < config.rb.sample > config.rb
+sed 's/#$controller_count=1/$controller_count=2/g' < config.rb.sample > config.rb
 
 # Create cluster
-#vagrant up
+vagrant up
 
 # -- Configure kubernetes client kubectl --
 curl -O https://storage.googleapis.com/kubernetes-release/release/v1.3.4/bin/linux/amd64/kubectl > $BASE_PWD/kubectl
