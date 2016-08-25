@@ -19,7 +19,7 @@ echo "export PATH=$PATH:$BASE_PWD" > $BASE_PWD/dockercoins.env
 export PATH=$PATH:$BASE_PWD
 
 echo export KUBECONFIG="${KUBECONFIG}:$PWD/kubeconfig" >> $BASE_PWD/dockercoins.env
-export KUBECONFIG="${KUBECONFIG}:$PWD/kubeconfig"
+export KUBECONFIG="$PWD/kubeconfig"
 kubectl config set-cluster vagrant-multi-cluster \
     --server=https://172.17.4.101:443 \
     --certificate-authority=${PWD}/ssl/ca.pem
