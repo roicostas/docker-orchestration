@@ -7,6 +7,5 @@ vagrant destroy -f
 cd $BASE_PWD
 rm -rf coreos-kubernetes
 rm key key.pub
-rm kubeconfig
 rm kubectl
 rm dockercoins.env
