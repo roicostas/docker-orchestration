@@ -15,10 +15,10 @@ vagrant up
 # -- Configure kubernetes client kubectl --
 curl -O https://storage.googleapis.com/kubernetes-release/release/v1.3.4/bin/linux/amd64/kubectl > $BASE_PWD/kubectl
 chmod +x $BASE_PWD/kubectl
-echo 'export PATH=$PATH:$BASE_PWD' > $BASE_PWD/dockercoins.env
+echo "export PATH=$PATH:$BASE_PWD" > $BASE_PWD/dockercoins.env
 export PATH=$PATH:$BASE_PWD
 
-echo 'export KUBECONFIG="${KUBECONFIG}:$PWD/kubeconfig"' >> $BASE_PWD/dockercoins.env
+echo export KUBECONFIG="${KUBECONFIG}:$PWD/kubeconfig" >> $BASE_PWD/dockercoins.env
 export KUBECONFIG="${KUBECONFIG}:$PWD/kubeconfig"
 kubectl config set-cluster vagrant-multi-cluster \
     --server=https://172.17.4.101:443 \
@@ -45,12 +45,13 @@ echo Enviroment information saved at dockercoins.env
 cd $BASE_PWD
 . $BASE_PWD/dockercoins.env
 # Wait for kubernetes cluster to be up
-while ! curl $c1:443 ; do
+while ! curl $c1:443 &> /dev/null ; do
     echo Waiting for kubernetes to be up
     sleep 1
 done
 
 # -- Allow scheduling in master nodes --
+sleep 1
 for node in $(kubectl get nodes --no-headers | grep SchedulingDisabled | awk '{print $1}'); do
     kubectl uncordon $node
 done
