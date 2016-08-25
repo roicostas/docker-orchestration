@@ -3,11 +3,11 @@
 BASE_PWD=$PWD
 
 # -- Setup CoreOS-kubernetes cluster --
-git clone https://github.com/coreos/coreos-kubernetes.git
+git clone https://github.com/roicostas/coreos-kubernetes.git
 cd coreos-kubernetes/multi-node/vagrant
 
-# Condigure two controllers
-sed 's/#$controller_count=1/$controller_count=2/g' < config.rb.sample > config.rb
+# Condigure two workers
+sed 's/#$worker_count=1/$worker_count=2/g' < config.rb.sample > config.rb
 
 # Create cluster
 vagrant up
