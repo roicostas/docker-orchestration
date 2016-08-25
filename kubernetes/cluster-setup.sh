@@ -18,7 +18,7 @@ chmod +x $BASE_PWD/kubectl
 echo "export PATH=$PATH:$BASE_PWD" > $BASE_PWD/dockercoins.env
 export PATH=$PATH:$BASE_PWD
 
-echo export KUBECONFIG="${KUBECONFIG}:$PWD/kubeconfig" >> $BASE_PWD/dockercoins.env
+echo export KUBECONFIG="$PWD/kubeconfig" >> $BASE_PWD/dockercoins.env
 export KUBECONFIG="$PWD/kubeconfig"
 kubectl config set-cluster vagrant-multi-cluster \
     --server=https://172.17.4.101:443 \
@@ -50,6 +50,7 @@ while [ "$(kubectl get nodes --no-headers 2> /dev/null | wc -l)" != "3" ] ; do
     echo Machines up $(kubectl get nodes --no-headers 2> /dev/null | wc -l)/3
     sleep 2
 done
+echo Machines up $(kubectl get nodes --no-headers 2> /dev/null | wc -l)/3
 
 # -- Allow scheduling in master nodes --
 sleep 1
