@@ -2,9 +2,11 @@
 
 . dockercoins.env 
 
-# Create registry  deployment 
-kubectl run kube-registry --image=registry:2 --replicas=1
-# Create registry service
-kubectl expose deployment kube-registry --port=5000 --target-port=5000 --name=kube-registry --type=NodePort
+# Assign c1 a label to run the registry on it
+kubectl label nodes $c1 role=master
 
-echo REGISTRY_DASH=localhost:$(kubectl describe service kube-registry | grep NodePort | grep -o "[0-9]*")/ >> dockercoins.env
+kubectl create -f registry.yml
+
+REGISTRY=localhost:$(kubectl describe service kube-registry | grep NodePort | grep -o "[0-9]*")
+echo REGISTRY=$REGISTRY >> dockercoins.env
+echo REGISTRY_DASH=$REGISTRY/ >> dockercoins.env
