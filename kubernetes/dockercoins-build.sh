@@ -12,4 +12,6 @@ chmod +x docker-compose
 export REGISTRY_DASH=$REGISTRY_DASH
 ./docker-compose -f docker-compose.yml-registry build
 ./docker-compose -f docker-compose.yml-registry push
+docker tag ${REGISTRY_DASH}dockercoins_worker ${REGISTRY_DASH}dockercoins_worker:v2
+docker push ${REGISTRY_DASH}dockercoins_worker:v2
 EOF
