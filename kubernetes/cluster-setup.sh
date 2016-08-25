@@ -45,9 +45,10 @@ echo Enviroment information saved at dockercoins.env
 cd $BASE_PWD
 . $BASE_PWD/dockercoins.env
 # Wait for kubernetes cluster to be up
-while ! curl $c1:443 &> /dev/null ; do
-    echo Waiting for kubernetes to be up
-    sleep 1
+echo Waiting for kubernetes services to be up, this may take a few minutes ...
+while [ "$(kubectl get nodes --no-headers 2> /dev/null | wc -l)" != "3" ] ; do
+    echo Machines up $(kubectl get nodes --no-headers 2> /dev/null | wc -l)/3
+    sleep 2
 done
 
 # -- Allow scheduling in master nodes --
