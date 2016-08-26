@@ -51,9 +51,3 @@ while [ "$(kubectl get nodes --no-headers 2> /dev/null | wc -l)" != "3" ] ; do
     sleep 2
 done
 echo Machines up $(kubectl get nodes --no-headers 2> /dev/null | wc -l)/3
-
-# -- Allow scheduling in master nodes --
-sleep 1
-for node in $(kubectl get nodes --no-headers | grep SchedulingDisabled | awk '{print $1}'); do
-    kubectl uncordon $node
-done
