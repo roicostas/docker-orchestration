@@ -12,8 +12,15 @@ spec:
       containers:
       - name: registry
         image: registry:2
+        volumeMounts:
+        - name: registry-path
+          mountPath: /var/lib/registry
       nodeSelector:
         role: master
+      volumes:
+      - name: registry-path
+        hostPath:
+          path: /var/lib/registry
 ---
 apiVersion: v1
 kind: Service

@@ -3,7 +3,7 @@
 . dockercoins.env 
 
 # Assign c1 a label to run the registry on it
-kubectl label nodes $c1 role=master
+kubectl label --overwrite node $c1 role=master
 
 kubectl create -f registry.yml
 
