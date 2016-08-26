@@ -11,4 +11,6 @@ kubectl run hasher --image=$REGISTRY/dockercoins_hasher --expose --port=80
 # Create webui deployment 
 kubectl run webui --image=$REGISTRY/dockercoins_webui --replicas=1
 # Create webui service
-kubectl expose deployment webui --port=8000 --target-port=80 --name=webui --type=LoadBalancer
+kubectl expose deployment webui --port=8000 --target-port=80 --name=webui --type=NodePort
+
+echo WEBUI_URL=$c1:$(kubectl describe service webui | grep NodePort | grep -o "[0-9]*")
