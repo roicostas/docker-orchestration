@@ -51,3 +51,6 @@ while [ "$(kubectl get nodes --no-headers 2> /dev/null | wc -l)" != "3" ] ; do
     sleep 2
 done
 echo Machines up $(kubectl get nodes --no-headers 2> /dev/null | wc -l)/3
+
+# Allow to schedule containers in master node
+kubectl uncordon $c1
