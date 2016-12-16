@@ -1,0 +1,5 @@
+{
+  "dependencies": ["/dockercoins/db"],
+  "groups": [],
+  "id": "/dockercoins/ui"
+}

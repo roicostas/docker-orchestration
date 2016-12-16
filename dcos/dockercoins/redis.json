@@ -1,0 +1,26 @@
+{
+  "id": "/redis",
+  "cpus": 0.1,
+  "mem": 64.0,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "redis",
+      "network": "USER",
+      "portMappings": [
+        { "containerPort": 6379, 
+          "hostPort": 0,
+          "servicePort": 6379,
+          "labels": {
+              "VIP_0": "/redis:6379"
+           },
+           "protocol": "tcp" 
+        }
+      ]
+    }
+  },
+  "ipAddress": {
+    "networkName": "dcos"
+  }
+}

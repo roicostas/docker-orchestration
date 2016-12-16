@@ -1,0 +1,6 @@
+{
+  "marathon-lb":{
+    "name":"marathon-lb",
+    "haproxy-group":"external"
+  }
+}

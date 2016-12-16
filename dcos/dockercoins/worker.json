@@ -1,0 +1,21 @@
+{
+  "id": "/worker",
+  "cpus": 0.1,
+  "mem": 64.0,
+  "instances": 2,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "jpetazzo/dockercoins_worker:1456493297",
+      "network": "USER",
+      "parameters": [
+                { "key": "dns-search", "value": "marathon.l4lb.thisdcos.directory" },
+                { "key": "dns-search", "value": "dockercoins.marathon.mesos" },
+                { "key": "dns-search", "value": "marathon.mesos" }
+      ]
+    }
+  },
+  "ipAddress": {
+    "networkName": "dcos"
+  }
+}
