@@ -15,8 +15,6 @@ spec:
         volumeMounts:
         - name: registry-path
           mountPath: /var/lib/registry
-      nodeSelector:
-        role: master
       volumes:
       - name: registry-path
         hostPath:
