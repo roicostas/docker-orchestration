@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: dockercoins-webui
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: www.dockercoins.com
+    http:
+      paths:
+      - backend:
+          serviceName: webui
+          servicePort: 80

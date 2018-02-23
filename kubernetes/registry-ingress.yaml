@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: dockercoins-registry
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: registry.mydomain.com
+    http:
+      paths:
+      - backend:
+          serviceName: kube-registry
+          servicePort: 5000
