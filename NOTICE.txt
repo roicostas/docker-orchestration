@@ -7,3 +7,7 @@ Copyright 2015 Jérôme Petazzoni
 
 monitoring provided by Kentik
 from https://github.com/Kentik/docker-monitor
+
+traefik provided by containous
+from https://github.com/containous/traefik
+Copyright (c) 2016-2018 Containous SAS
