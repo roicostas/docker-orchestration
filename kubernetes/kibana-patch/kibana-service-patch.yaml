@@ -1,0 +1,4 @@
+spec:
+  type: NodePort
+  ports:
+  - nodePort: 35601
