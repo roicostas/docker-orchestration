@@ -29,4 +29,5 @@ spec:
     app: kube-registry
   ports:
   - port: 5000
+    nodePort: 35000
   type: NodePort
