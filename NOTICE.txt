@@ -11,3 +11,7 @@ from https://github.com/Kentik/docker-monitor
 traefik provided by containous
 from https://github.com/containous/traefik
 Copyright (c) 2016-2018 Containous SAS
+
+heapster provided by kubernetes
+from https://github.com/kubernetes/heapster
+Apache License 2.0
