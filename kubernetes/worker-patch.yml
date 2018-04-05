@@ -1,9 +1,9 @@
 spec:
   template:
     spec:
-    containers:
-    - name: worker
-      image: $REGISTRY/worker:1.0
+      containers:
+      - name: worker
+        image: $REGISTRY/worker:1.0
   strategy:
     rollingUpdate:
       maxUnavailable: 0
