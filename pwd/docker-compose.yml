@@ -1,0 +1,33 @@
+version: '3.2'
+services:
+    haproxy:
+        image: haproxy
+        ports:
+            - "80:8080"
+        volumes:
+            - ./haproxy:/usr/local/etc/haproxy
+    pwd:
+        # pwd daemon container always needs to be named this way
+        container_name: pwd
+        image: roicostas/docker-course-pwd
+        command: ./play-with-docker -save /pwd/sessions -name l2
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - sessions:/pwd
+    l2:
+        # l2 daemon container always needs to be namid this way
+        container_name: l2
+        image: roicostas/docker-course-l2
+        command: ./play-with-docker-l2 -ssh_key_path /etc/ssh/ssh_host_rsa_key -name l2 -save /pwd/networks
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - networks:/pwd
+        ports:
+            - "8022:22"
+            - "8053:53"
+            - "443:443"
+    web:
+        image: roicostas/docker-course-web
+volumes:
+    sessions:
+    networks:
